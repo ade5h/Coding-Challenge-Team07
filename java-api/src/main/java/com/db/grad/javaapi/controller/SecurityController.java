@@ -6,13 +6,20 @@ import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.db.grad.javaapi.dto.SecurityDto;
 import com.db.grad.javaapi.model.Security;
 import com.db.grad.javaapi.model.Trade;
 import com.db.grad.javaapi.service.SecurityService;
@@ -51,5 +58,24 @@ public class SecurityController {
 	@GetMapping("/trades/{securityId}")
 	public List<Trade> getTradesForSecurity(@PathVariable Long securityId){
 		return tradeService.getTradesForSecurity(securityId);
+	}
+	
+	@PostMapping("/create")
+	public Security createSecurity(@RequestBody SecurityDto securityDto){
+		return securityService.createSecurity(securityDto);
+	}
+	
+	@PutMapping("/update/{id}")
+	public Security updateSecurtiy(@RequestBody SecurityDto securityDto, @PathVariable Long id){
+		return securityService.updateSecurity(securityDto, id);	
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<HttpStatus> deleteSecurtiy(@PathVariable Long id){
+		if(securityService.deleteSecurity(id)) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}		
 	}
 }
