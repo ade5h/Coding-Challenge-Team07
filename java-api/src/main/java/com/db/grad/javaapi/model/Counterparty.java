@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ public class Counterparty {
 	Long id;
 	String name;
 	
-	@OneToMany(mappedBy="counterParty")
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="counterParty")
 	List<Trade> trades;
 	
 	public Counterparty(Long id, String name, List<Trade> trades) {

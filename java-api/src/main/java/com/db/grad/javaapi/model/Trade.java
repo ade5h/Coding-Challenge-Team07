@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,15 +29,15 @@ public class Trade {
 	@Temporal(TemporalType.DATE)
 	Date settlementDate;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="book_id")
 	Book book;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="security_id")
 	Security security;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="counterparty_id")
 	Counterparty counterParty;
 

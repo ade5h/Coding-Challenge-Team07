@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,10 +22,10 @@ public class Book{
 	Long id;
 	String name;
 	
-	@OneToMany(mappedBy="book")
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="book")
 	List<Trade> trades;
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
 	  name = "book_user", 
 	  joinColumns = @JoinColumn(name = "book_id"), 
