@@ -15,10 +15,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-@Table(name="securities")
+@Table(name = "securities")
 public class Security {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
@@ -26,17 +28,18 @@ public class Security {
 	String CUSIP;
 	String issuer;
 	@Temporal(TemporalType.DATE)
-	@Column(name="MATURITYDATE")
+	@Column(name = "MATURITYDATE")
 	Date maturityDate;
 	String coupon;
 	String type;
-	@Column(name="FACEVALUE")
+	@Column(name = "FACEVALUE")
 	Double faceValue;
 	String status;
-	
-	@OneToMany(fetch=FetchType.EAGER, mappedBy="security")
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "security")
+	@JsonManagedReference
 	List<Trade> trades;
-	
+
 	public Security(Long id, String iSIN, String cUSIP, String issuer, Date maturityDate, String coupon, String type,
 			Double faceValue, String status, List<Trade> trades) {
 		super();
@@ -52,8 +55,9 @@ public class Security {
 		this.trades = trades;
 	}
 
-	public Security() {}
-	
+	public Security() {
+	}
+
 	public List<Trade> getTrades() {
 		return trades;
 	}
@@ -161,6 +165,5 @@ public class Security {
 				+ maturityDate + ", coupon=" + coupon + ", type=" + type + ", faceValue=" + faceValue + ", status="
 				+ status + ", trades=" + trades + "]";
 	}
-	
-	
+
 }

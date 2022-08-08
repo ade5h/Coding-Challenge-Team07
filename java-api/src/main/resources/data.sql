@@ -21,8 +21,8 @@ INSERT INTO trades (id,quantity,status,price,BUYSELL,TRADEDATE,SETTLEMENTDATE) V
 INSERT INTO trades (id,quantity,status,price,BUYSELL,TRADEDATE,SETTLEMENTDATE) VALUES (4,20,'completed',400,'sell','2019-09-01','2021-04-01');
 INSERT INTO trades (id,quantity,status,price,BUYSELL,TRADEDATE,SETTLEMENTDATE) VALUES (5,25,'incomplete',500,'buy','2019-08-01','2021-05-01');
 
-INSERT INTO securities (id,ISIN,CUSIP,issuer,maturityDate,coupon,type,faceValue,status) VALUES (1,'abc','hef','rahul','2019-12-01','THANKYOU200','ASDD',100,'MATURED');
-INSERT INTO securities (id,ISIN,CUSIP,issuer,maturityDate,coupon,type,faceValue,status) VALUES (2,'def','rhe','aakash','2019-11-01','THANKYOU100','ASDD',200,'IMMATURE');
+INSERT INTO securities (id,ISIN,CUSIP,issuer,maturityDate,coupon,type,faceValue,status) VALUES (8,'abc','hef','rahul','2019-12-01','THANKYOU200','ASDD',100,'MATURED');
+INSERT INTO securities (id,ISIN,CUSIP,issuer,maturityDate,coupon,type,faceValue,status) VALUES (9,'def','rhe','aakash','2019-11-01','THANKYOU100','ASDD',200,'IMMATURE');
 INSERT INTO securities (id,ISIN,CUSIP,issuer,maturityDate,coupon,type,faceValue,status) VALUES (3,'feg','fjt','aastha','2019-10-01','THANKYOU400','ASDD',300,'MATURED');
 INSERT INTO securities (id,ISIN,CUSIP,issuer,maturityDate,coupon,type,faceValue,status) VALUES (4,'grd','ijo','aakarshi','2019-09-01','THANKYOU700','ASDD',400,'IMMATURE');
 INSERT INTO securities (id,ISIN,CUSIP,issuer,maturityDate,coupon,type,faceValue,status) VALUES (5,'teg','opl','chirag','2019-08-01','THANKYOU200','ASDD',500,'MATURED');
@@ -32,8 +32,12 @@ INSERT INTO counter_party values (1,'counterparty1');
 INSERT INTO counter_party values (2,'counterparty2');
 
 -- book_id,security_id,counterparty_id
--- update trades set book_id=1,security_id=1,counterparty_id=1 where id=1;
--- update trades set book_id=1,security_id=1,counterparty_id=1 where id=2;
--- update trades set book_id=2,security_id=2,counterparty_id=2 where id=3;
--- update trades set book_id=3,security_id=2,counterparty_id=1 where id=4;
--- update trades set book_id=2,security_id=3,counterparty_id=2 where id=5;
+update trades set book_book_id=1,security_id=3,counter_party_counter_party_id=1 where id=1;
+update trades set book_book_id=1,security_id=4,counter_party_counter_party_id=1 where id=2;
+update trades set book_book_id=2,security_id=3,counter_party_counter_party_id=2 where id=3;
+update trades set book_book_id=3,security_id=3,counter_party_counter_party_id=1 where id=4;
+update trades set book_book_id=2,security_id=3,counter_party_counter_party_id=2 where id=5;
+
+
+
+

@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "counter_party")
 public class Counterparty {
@@ -22,6 +24,7 @@ public class Counterparty {
 	String name;
 
 	@OneToMany(mappedBy = "counterParty")
+	@JsonManagedReference
 	List<Trade> trades;
 
 	public Counterparty(Long id, String name, List<Trade> trades) {

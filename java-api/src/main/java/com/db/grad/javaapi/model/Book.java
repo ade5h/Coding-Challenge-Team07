@@ -15,6 +15,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "books")
 public class Book {
@@ -25,10 +28,12 @@ public class Book {
 	String name;
 
 	@OneToMany(mappedBy = "book")
+	@JsonManagedReference
 	List<Trade> trades;
 
 	@ManyToMany
-	@JoinTable(name = "book_user", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	// @JoinTable(name = "book_user", joinColumns = @JoinColumn(name = "book_id"),
+	// inverseJoinColumns = @JoinColumn(name = "user_id"))
 	List<User> users;
 
 	public Book() {

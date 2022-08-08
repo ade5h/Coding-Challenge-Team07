@@ -23,13 +23,13 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Autowired
 	SecurityRepository securityRepo;
-	
+
 	@Autowired
 	UserRepository userRepo;
-	
+
 	@Autowired
 	TradeRepository tradeRepo;
-	
+
 	@Override
 	public List<Security> getAllSecurities() {
 		return securityRepo.findAll();
@@ -47,18 +47,20 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Override
 	public List<Security> getSecuritiesByUserId(Long userId) {
-		try {
-			Set<Security> result = Collections.emptySet();
-			User user = userRepo.findById(userId).get();
-			for(Book book:user.getBooks()) {
-				for (Trade trade: book.getTrades()) {
-					result.add(trade.getSecurity());
-				}
+
+		System.out.println("before collection");
+		Set<Security> result = Collections.emptySet();
+		System.out.println("result ::" + userId);
+		List<User> user = userRepo.findAll();
+		System.out.println(user + "::: user");
+		for (Book book : user.get(0).getBooks()) {
+			for (Trade trade : book.getTrades()) {
+				result.add(trade.getSecurity());
 			}
-			return new ArrayList<Security>(result);
-		}catch(Exception e) {
-			throw e;
 		}
+		System.out.println("###result :: " + result);
+		return new ArrayList<Security>(result);
+
 	}
 
 	@Override
@@ -72,10 +74,11 @@ public class SecurityServiceImpl implements SecurityService {
 		newSecurity.setMaturityDate(securityDto.getMaturityDate());
 		newSecurity.setStatus(securityDto.getStatus());
 		newSecurity.setType(securityDto.getType());
-		
+
 		List<Trade> trades = tradeRepo.findByIdIn(securityDto.getTrades());
 		newSecurity.setTrades(trades);
-	
+		System.out.println(trades.size());
+
 		newSecurity = securityRepo.saveAndFlush(newSecurity);
 		return newSecurity;
 	}
@@ -91,10 +94,10 @@ public class SecurityServiceImpl implements SecurityService {
 		newSecurity.setMaturityDate(securityDto.getMaturityDate());
 		newSecurity.setStatus(securityDto.getStatus());
 		newSecurity.setType(securityDto.getType());
-		
+
 		List<Trade> trades = tradeRepo.findByIdIn(securityDto.getTrades());
 		newSecurity.setTrades(trades);
-	
+
 		newSecurity = securityRepo.saveAndFlush(newSecurity);
 		return newSecurity;
 	}
@@ -104,7 +107,7 @@ public class SecurityServiceImpl implements SecurityService {
 		try {
 			securityRepo.deleteById(id);
 			return true;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			return false;
 		}
 	}

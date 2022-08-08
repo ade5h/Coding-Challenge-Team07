@@ -15,6 +15,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "trades")
 public class Trade {
@@ -34,15 +37,21 @@ public class Trade {
 	Date settlementDate;
 
 	@ManyToOne
+	@JsonBackReference
 	// @JoinColumn(name = "book_id")
+	// @Column(name = "book_id")
 	Book book;
 
 	@ManyToOne
+	@JsonBackReference
 	// @JoinColumn(name = "security_id")
+	// @Column(name = "security_id")
 	Security security;
 
 	@ManyToOne
+	@JsonBackReference
 	// @JoinColumn(name = "counterparty_id")
+	// @Column(name = "counterparty_id")
 	Counterparty counterParty;
 
 	public Trade(Long id, Integer quantity, String status, Double price, String buySell, Date tradeDate,
