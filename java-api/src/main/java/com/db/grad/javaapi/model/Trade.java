@@ -3,6 +3,7 @@ package com.db.grad.javaapi.model;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,30 +15,33 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="trades")
+@Table(name = "trades")
 public class Trade {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
-	Integer quantity; 
+	Integer quantity;
 	String status;
 	Double price;
+	@Column(name = "BUYSELL")
 	String buySell;
 	@Temporal(TemporalType.DATE)
+	@Column(name = "TRADEDATE")
 	Date tradeDate;
 	@Temporal(TemporalType.DATE)
+	@Column(name = "SETTLEMENTDATE")
 	Date settlementDate;
-	
+
 	@ManyToOne
-    @JoinColumn(name="book_id")
+	// @JoinColumn(name = "book_id")
 	Book book;
-	
+
 	@ManyToOne
-	@JoinColumn(name="security_id")
+	// @JoinColumn(name = "security_id")
 	Security security;
-	
+
 	@ManyToOne
-	@JoinColumn(name="counterparty_id")
+	// @JoinColumn(name = "counterparty_id")
 	Counterparty counterParty;
 
 	public Trade(Long id, Integer quantity, String status, Double price, String buySell, Date tradeDate,
@@ -167,6 +171,5 @@ public class Trade {
 	public void setCounterParty(Counterparty counterParty) {
 		this.counterParty = counterParty;
 	}
-	
-	
+
 }

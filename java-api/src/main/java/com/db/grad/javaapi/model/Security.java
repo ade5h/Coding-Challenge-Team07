@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,9 +25,11 @@ public class Security {
 	String CUSIP;
 	String issuer;
 	@Temporal(TemporalType.DATE)
+	@Column(name="MATURITYDATE")
 	Date maturityDate;
 	String coupon;
 	String type;
+	@Column(name="FACEVALUE")
 	Double faceValue;
 	String status;
 	

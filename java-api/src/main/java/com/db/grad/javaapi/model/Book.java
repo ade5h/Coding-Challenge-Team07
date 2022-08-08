@@ -3,6 +3,7 @@ package com.db.grad.javaapi.model;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,24 +15,23 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="books")
-public class Book{
+@Table(name = "books")
+public class Book {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "book_id")
 	Long id;
 	String name;
-	
-	@OneToMany(mappedBy="book")
+
+	@OneToMany(mappedBy = "book")
 	List<Trade> trades;
-	
+
 	@ManyToMany
-	@JoinTable(
-	  name = "book_user", 
-	  joinColumns = @JoinColumn(name = "book_id"), 
-	  inverseJoinColumns = @JoinColumn(name="user_id"))
+	@JoinTable(name = "book_user", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	List<User> users;
-	
-	public Book() {}
+
+	public Book() {
+	}
 
 	public Book(Long id, String name, List<Trade> trades, List<User> users) {
 		super();
@@ -40,8 +40,6 @@ public class Book{
 		this.trades = trades;
 		this.users = users;
 	}
-
-	
 
 	public List<User> getBooks() {
 		return users;
@@ -62,12 +60,15 @@ public class Book{
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -95,5 +96,4 @@ public class Book{
 				&& Objects.equals(users, other.users);
 	}
 
-	
 }

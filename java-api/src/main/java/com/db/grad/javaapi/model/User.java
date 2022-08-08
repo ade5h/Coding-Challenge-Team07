@@ -3,6 +3,7 @@ package com.db.grad.javaapi.model;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,20 +14,18 @@ import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "user_id")
 	Long id;
 	String name;
 	String email;
 	String role;
-	
+
 	@ManyToMany
-	@JoinTable(
-	  name = "book_user", 
-	  joinColumns = @JoinColumn(name = "user_id"), 
-	  inverseJoinColumns = @JoinColumn(name="book_id"))
+	@JoinTable(name = "book_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
 	List<Book> books;
 
 	public User(Long id, String name, String email, String role, List<Book> books) {
