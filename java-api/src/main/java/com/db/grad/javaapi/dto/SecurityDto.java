@@ -11,7 +11,7 @@ public class SecurityDto {
 	Date maturityDate;
 	String coupon;
 	String type;
-	Double faceValue;
+	Double faceValue;	
 	String status;
 	List<Long> trades;
 	public SecurityDto(String iSIN, String cUSIP, String issuer, Date maturityDate, String coupon, String type,
