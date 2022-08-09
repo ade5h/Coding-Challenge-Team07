@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.db.grad.javaapi.dto.SecurityDto;
+import com.db.grad.javaapi.dto.WatchlistUpdateDto;
 import com.db.grad.javaapi.model.Security;
 import com.db.grad.javaapi.model.Trade;
 import com.db.grad.javaapi.service.SecurityService;
@@ -68,6 +69,15 @@ public class SecurityController {
 	@PostMapping("/create")
 	public Security createSecurity(@RequestBody SecurityDto securityDto){
 		return securityService.createSecurity(securityDto);
+	}
+	
+	@PutMapping("/watchlist")
+	public ResponseEntity<HttpStatus> updateWatchlist(@RequestBody WatchlistUpdateDto watchlistDto){
+		if(securityService.updateWatchlist(watchlistDto)) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}	
 	}
 	
 	@PutMapping("/update/{id}")

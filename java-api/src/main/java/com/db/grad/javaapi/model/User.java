@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.JoinColumn;
@@ -34,7 +35,7 @@ public class User {
 	List<Book> books;
 	
 	@OneToMany(mappedBy="user")
-	@JsonManagedReference
+	@JsonBackReference
 	List<Security> securityWatchList;
 	
 	public User(Long id, String name, String email, String role, List<Book> books, List<Security> securityWatchList) {

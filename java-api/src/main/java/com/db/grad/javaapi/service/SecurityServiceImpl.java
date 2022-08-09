@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.db.grad.javaapi.dto.SecurityDto;
+import com.db.grad.javaapi.dto.WatchlistUpdateDto;
 import com.db.grad.javaapi.model.Book;
 import com.db.grad.javaapi.model.Security;
 import com.db.grad.javaapi.model.Trade;
@@ -118,6 +119,28 @@ public class SecurityServiceImpl implements SecurityService {
 	public List<Security> getUserWatchlist(Long userId) {
 		User user = userRepo.findById(userId).get();
 		return user.getSecurityWatchList();
+	}
+
+	@Override
+	public boolean updateWatchlist(WatchlistUpdateDto watchlistDto) {
+		try {
+			List<Security> securities = securityRepo.findByIdIn(watchlistDto.getSecurities());
+			if(watchlistDto.getUserId() != -1) {
+				User user = userRepo.findById(watchlistDto.getUserId()).get();
+				for(Security sec:securities) {
+					sec.setUser(user);
+				}
+			} else {
+				for(Security sec:securities) {
+					sec.setUser(null);
+				}
+			}
+			securityRepo.saveAllAndFlush(securities);
+			return true;
+		}catch (Exception e) {
+			System.out.println("Exception @ updateWatchList" + e.getMessage() + "\n\n" + e.getStackTrace() );
+			return false;
+		}
 	}
 
 }

@@ -43,7 +43,7 @@ public class Security {
 	List<Trade> trades;
 	
 	@ManyToOne
-	@JsonBackReference
+	@JsonManagedReference
 	User user;
 	
 	public Security(Long id, String iSIN, String cUSIP, String issuer, Date maturityDate, String coupon, String type,

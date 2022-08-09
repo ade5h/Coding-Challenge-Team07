@@ -4,9 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import com.db.grad.javaapi.dto.SecurityDto;
+import com.db.grad.javaapi.dto.WatchlistUpdateDto;
 import com.db.grad.javaapi.model.Security;
 
 public interface SecurityService {
+	boolean updateWatchlist(WatchlistUpdateDto watchlistDto);
+	
 	List<Security> getUserWatchlist(Long userId);
 	
 	List<Security> getAllSecurities();
