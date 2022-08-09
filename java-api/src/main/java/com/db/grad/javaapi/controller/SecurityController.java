@@ -60,6 +60,11 @@ public class SecurityController {
 		return tradeService.getTradesForSecurity(securityId);
 	}
 	
+	@GetMapping("/watchlist")
+	public List<Security> getUserWatchlist(@RequestParam(name="user-id") Long userId){
+		return securityService.getUserWatchlist(userId);
+	}
+	
 	@PostMapping("/create")
 	public Security createSecurity(@RequestBody SecurityDto securityDto){
 		return securityService.createSecurity(securityDto);

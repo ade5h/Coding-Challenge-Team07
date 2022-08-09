@@ -10,11 +10,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -39,9 +41,13 @@ public class Security {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "security")
 	@JsonManagedReference
 	List<Trade> trades;
-
+	
+	@ManyToOne
+	@JsonBackReference
+	User user;
+	
 	public Security(Long id, String iSIN, String cUSIP, String issuer, Date maturityDate, String coupon, String type,
-			Double faceValue, String status, List<Trade> trades) {
+			Double faceValue, String status, List<Trade> trades, User user) {
 		super();
 		this.id = id;
 		ISIN = iSIN;
@@ -53,6 +59,7 @@ public class Security {
 		this.faceValue = faceValue;
 		this.status = status;
 		this.trades = trades;
+		this.user = user;
 	}
 
 	public Security() {
@@ -138,9 +145,26 @@ public class Security {
 		this.status = status;
 	}
 
+	
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Security [id=" + id + ", ISIN=" + ISIN + ", CUSIP=" + CUSIP + ", issuer=" + issuer + ", maturityDate="
+				+ maturityDate + ", coupon=" + coupon + ", type=" + type + ", faceValue=" + faceValue + ", status="
+				+ status + ", trades=" + trades + ", user=" + user + "]";
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(CUSIP, ISIN, coupon, faceValue, id, issuer, maturityDate, status, trades, type);
+		return Objects.hash(CUSIP, ISIN, coupon, faceValue, id, issuer, maturityDate, status, trades, type, user);
 	}
 
 	@Override
@@ -156,14 +180,9 @@ public class Security {
 				&& Objects.equals(coupon, other.coupon) && Objects.equals(faceValue, other.faceValue)
 				&& Objects.equals(id, other.id) && Objects.equals(issuer, other.issuer)
 				&& Objects.equals(maturityDate, other.maturityDate) && Objects.equals(status, other.status)
-				&& Objects.equals(trades, other.trades) && Objects.equals(type, other.type);
+				&& Objects.equals(trades, other.trades) && Objects.equals(type, other.type)
+				&& Objects.equals(user, other.user);
 	}
-
-	@Override
-	public String toString() {
-		return "Security [id=" + id + ", ISIN=" + ISIN + ", CUSIP=" + CUSIP + ", issuer=" + issuer + ", maturityDate="
-				+ maturityDate + ", coupon=" + coupon + ", type=" + type + ", faceValue=" + faceValue + ", status="
-				+ status + ", trades=" + trades + "]";
-	}
-
+	
+	
 }

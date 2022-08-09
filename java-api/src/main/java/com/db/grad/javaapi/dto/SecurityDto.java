@@ -13,9 +13,12 @@ public class SecurityDto {
 	String type;
 	Double faceValue;	
 	String status;
+	Long user;
 	List<Long> trades;
+	
+	
 	public SecurityDto(String iSIN, String cUSIP, String issuer, Date maturityDate, String coupon, String type,
-			Double faceValue, String status, List<Long> trades) {
+			Double faceValue, String status, Long user, List<Long> trades) {
 		super();
 		ISIN = iSIN;
 		CUSIP = cUSIP;
@@ -25,6 +28,7 @@ public class SecurityDto {
 		this.type = type;
 		this.faceValue = faceValue;
 		this.status = status;
+		this.user = user;
 		this.trades = trades;
 	}
 	public SecurityDto() {
@@ -84,9 +88,22 @@ public class SecurityDto {
 	public void setTrades(List<Long> trades) {
 		this.trades = trades;
 	}
+	
+	public Long getUser() {
+		return user;
+	}
+	public void setUser(Long user) {
+		this.user = user;
+	}
+	@Override
+	public String toString() {
+		return "SecurityDto [ISIN=" + ISIN + ", CUSIP=" + CUSIP + ", issuer=" + issuer + ", maturityDate="
+				+ maturityDate + ", coupon=" + coupon + ", type=" + type + ", faceValue=" + faceValue + ", status="
+				+ status + ", user=" + user + ", trades=" + trades + "]";
+	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(CUSIP, ISIN, coupon, faceValue, issuer, maturityDate, status, trades, type);
+		return Objects.hash(CUSIP, ISIN, coupon, faceValue, issuer, maturityDate, status, trades, type, user);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -101,12 +118,7 @@ public class SecurityDto {
 				&& Objects.equals(coupon, other.coupon) && Objects.equals(faceValue, other.faceValue)
 				&& Objects.equals(issuer, other.issuer) && Objects.equals(maturityDate, other.maturityDate)
 				&& Objects.equals(status, other.status) && Objects.equals(trades, other.trades)
-				&& Objects.equals(type, other.type);
+				&& Objects.equals(type, other.type) && Objects.equals(user, other.user);
 	}
-	@Override
-	public String toString() {
-		return "SecurityDto [ISIN=" + ISIN + ", CUSIP=" + CUSIP + ", issuer=" + issuer + ", maturityDate="
-				+ maturityDate + ", coupon=" + coupon + ", type=" + type + ", faceValue=" + faceValue + ", status="
-				+ status + ", trades=" + trades + "]";
-	}
+	
 }

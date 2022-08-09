@@ -11,7 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.JoinColumn;
 
 @Entity
@@ -28,14 +32,19 @@ public class User {
 	@ManyToMany
 	@JoinTable(name = "book_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
 	List<Book> books;
-
-	public User(Long id, String name, String email, String role, List<Book> books) {
+	
+	@OneToMany(mappedBy="user")
+	@JsonManagedReference
+	List<Security> securityWatchList;
+	
+	public User(Long id, String name, String email, String role, List<Book> books, List<Security> securityWatchList) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.role = role;
 		this.books = books;
+		this.securityWatchList = securityWatchList;
 	}
 
 	public User() {
@@ -84,12 +93,13 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", role=" + role + ", books=" + books + "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", role=" + role + ", books=" + books
+				+ ", securityWatchList=" + securityWatchList + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(books, email, id, name, role);
+		return Objects.hash(books, email, id, name, role, securityWatchList);
 	}
 
 	@Override
@@ -102,7 +112,15 @@ public class User {
 			return false;
 		User other = (User) obj;
 		return Objects.equals(books, other.books) && Objects.equals(email, other.email) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name) && Objects.equals(role, other.role);
+				&& Objects.equals(name, other.name) && Objects.equals(role, other.role)
+				&& Objects.equals(securityWatchList, other.securityWatchList);
 	}
 
+	public List<Security> getSecurityWatchList() {
+		return securityWatchList;
+	}
+
+	public void setSecurityWatchList(List<Security> securityWatchList) {
+		this.securityWatchList = securityWatchList;
+	}
 }

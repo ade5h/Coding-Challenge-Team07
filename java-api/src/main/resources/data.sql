@@ -21,10 +21,10 @@ INSERT INTO trades (id,quantity,status,price,BUYSELL,TRADEDATE,SETTLEMENTDATE) V
 INSERT INTO trades (id,quantity,status,price,BUYSELL,TRADEDATE,SETTLEMENTDATE) VALUES (4,20,'completed',400,'sell','2019-09-01','2021-04-01');
 INSERT INTO trades (id,quantity,status,price,BUYSELL,TRADEDATE,SETTLEMENTDATE) VALUES (5,25,'incomplete',500,'buy','2019-08-01','2021-05-01');
 
-INSERT INTO securities (id,ISIN,CUSIP,issuer,maturityDate,coupon,type,faceValue,status) VALUES (8,'abc','hef','rahul','2019-12-01','THANKYOU200','ASDD',100,'MATURED');
-INSERT INTO securities (id,ISIN,CUSIP,issuer,maturityDate,coupon,type,faceValue,status) VALUES (9,'def','rhe','aakash','2019-11-01','THANKYOU100','ASDD',200,'IMMATURE');
-INSERT INTO securities (id,ISIN,CUSIP,issuer,maturityDate,coupon,type,faceValue,status) VALUES (3,'feg','fjt','aastha','2019-10-01','THANKYOU400','ASDD',300,'MATURED');
-INSERT INTO securities (id,ISIN,CUSIP,issuer,maturityDate,coupon,type,faceValue,status) VALUES (4,'grd','ijo','aakarshi','2019-09-01','THANKYOU700','ASDD',400,'IMMATURE');
+INSERT INTO securities (id,ISIN,CUSIP,issuer,maturityDate,coupon,type,faceValue,status,user_user_id) VALUES (8,'abc','hef','rahul','2019-12-01','THANKYOU200','ASDD',100,'MATURED',2);
+INSERT INTO securities (id,ISIN,CUSIP,issuer,maturityDate,coupon,type,faceValue,status,user_user_id) VALUES (9,'def','rhe','aakash','2019-11-01','THANKYOU100','ASDD',200,'IMMATURE',2);
+INSERT INTO securities (id,ISIN,CUSIP,issuer,maturityDate,coupon,type,faceValue,status,user_user_id) VALUES (3,'feg','fjt','aastha','2019-10-01','THANKYOU400','ASDD',300,'MATURED',3);
+INSERT INTO securities (id,ISIN,CUSIP,issuer,maturityDate,coupon,type,faceValue,status,user_user_id) VALUES (4,'grd','ijo','aakarshi','2019-09-01','THANKYOU700','ASDD',400,'IMMATURE',4);
 INSERT INTO securities (id,ISIN,CUSIP,issuer,maturityDate,coupon,type,faceValue,status) VALUES (5,'teg','opl','chirag','2019-08-01','THANKYOU200','ASDD',500,'MATURED');
 
 

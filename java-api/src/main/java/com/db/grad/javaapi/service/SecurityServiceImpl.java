@@ -75,9 +75,11 @@ public class SecurityServiceImpl implements SecurityService {
 		newSecurity.setStatus(securityDto.getStatus());
 		newSecurity.setType(securityDto.getType());
 
+		User user = userRepo.findById(securityDto.getUser()).get();
+		newSecurity.setUser(user);
+		
 		List<Trade> trades = tradeRepo.findByIdIn(securityDto.getTrades());
 		newSecurity.setTrades(trades);
-		System.out.println(trades.size());
 
 		newSecurity = securityRepo.saveAndFlush(newSecurity);
 		return newSecurity;
@@ -110,6 +112,12 @@ public class SecurityServiceImpl implements SecurityService {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	@Override
+	public List<Security> getUserWatchlist(Long userId) {
+		User user = userRepo.findById(userId).get();
+		return user.getSecurityWatchList();
 	}
 
 }

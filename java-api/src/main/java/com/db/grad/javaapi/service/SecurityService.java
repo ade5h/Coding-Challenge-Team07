@@ -7,6 +7,7 @@ import com.db.grad.javaapi.dto.SecurityDto;
 import com.db.grad.javaapi.model.Security;
 
 public interface SecurityService {
+	List<Security> getUserWatchlist(Long userId);
 	
 	List<Security> getAllSecurities();
 	
