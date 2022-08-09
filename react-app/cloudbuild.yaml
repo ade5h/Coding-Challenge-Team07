@@ -13,26 +13,26 @@
 # limitations under the License.
 
 steps:
-- id: "Install dependencies"
-  name: "node:14.16.0"
-  dir: './react-app/'
-  entrypoint: npm
-  args: ['install']
+    - id: "Install dependencies"
+      name: "node:16.14.2"
+      dir: "./react-app/"
+      entrypoint: npm
+      args: ["install"]
 
-- id: "Run tests"
-  name: "node:14.16.0"
-  dir: './react-app/'
-  entrypoint: npm
-  args: ['test']
+    - id: "Run tests"
+      name: "node:16.14.2"
+      dir: "./react-app/"
+      entrypoint: npm
+      args: ["test"]
 
-- id: "Run custom commands"
-  name: "node:14.16.0"
-  dir: './react-app/'
-  entrypoint: npm
-  args: ['run', 'build']
+    - id: "Run custom commands"
+      name: "node:16.14.2"
+      dir: "./react-app/"
+      entrypoint: npm
+      args: ["run", "build"]
 
-- id: "Deploy the App"
-  name: "gcr.io/cloud-builders/gcloud"
-  dir: './react-app/'
-  args: ["app", "deploy"]
-  timeout: "1600s"
+    - id: "Deploy the App"
+      name: "gcr.io/cloud-builders/gcloud"
+      dir: "./react-app/"
+      args: ["app", "deploy"]
+      timeout: "1600s"
