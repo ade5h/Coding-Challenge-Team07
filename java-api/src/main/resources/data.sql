@@ -1,8 +1,8 @@
-INSERT INTO users (user_id,name, email,role) VALUES (1,'Admin', 'admin@gmail.com','ADMIN');
-INSERT INTO users (user_id,name, email,role) VALUES (2,'Aditya', 'aditya@gmail.com','user');
-INSERT INTO users (user_id,name, email,role) VALUES (3,'Aayush', 'aayush@gmail.com','user');
-INSERT INTO users (user_id,name, email,role) VALUES (4,'Askhat', 'akshat@gmail.com','user');
-INSERT INTO users (user_id,name, email,role) VALUES (5,'Adesh', 'adesh@gmail.com','user');
+INSERT INTO users (user_id,name, password, email,role) VALUES (1,'Admin', 'admin123', 'admin@gmail.com','ADMIN');
+INSERT INTO users (user_id,name, password, email,role) VALUES (2,'Aditya','admin123',  'aditya@gmail.com','user');
+INSERT INTO users (user_id,name, password, email,role) VALUES (3,'Aayush','admin123',  'aayush@gmail.com','user');
+INSERT INTO users (user_id,name, password, email,role) VALUES (4,'Askhat','admin123',  'akshat@gmail.com','user');
+INSERT INTO users (user_id,name, password, email,role) VALUES (5,'Adesh','admin123',  'adesh@gmail.com','user');
 
 INSERT INTO books (book_id,name) Values (1,'bonds_2019');
 INSERT INTO books (book_id,name) Values (2,'bonds_2020');
