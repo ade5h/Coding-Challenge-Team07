@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -27,7 +28,9 @@ public class User {
 	@Column(name = "user_id")
 	Long id;
 	String name;
+	@Email
 	String email;
+	String password;
 	String role;
 
 	@ManyToMany
@@ -37,12 +40,14 @@ public class User {
 	@OneToMany(mappedBy="user")
 	@JsonBackReference
 	List<Security> securityWatchList;
-	
-	public User(Long id, String name, String email, String role, List<Book> books, List<Security> securityWatchList) {
+
+	public User(Long id, String name, @Email String email, String password, String role, List<Book> books,
+			List<Security> securityWatchList) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.password = password;
 		this.role = role;
 		this.books = books;
 		this.securityWatchList = securityWatchList;
@@ -94,13 +99,13 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", role=" + role + ", books=" + books
-				+ ", securityWatchList=" + securityWatchList + "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
+				+ ", books=" + books + ", securityWatchList=" + securityWatchList + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(books, email, id, name, role, securityWatchList);
+		return Objects.hash(books, email, id, name, password, role, securityWatchList);
 	}
 
 	@Override
@@ -113,8 +118,16 @@ public class User {
 			return false;
 		User other = (User) obj;
 		return Objects.equals(books, other.books) && Objects.equals(email, other.email) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name) && Objects.equals(role, other.role)
-				&& Objects.equals(securityWatchList, other.securityWatchList);
+				&& Objects.equals(name, other.name) && Objects.equals(password, other.password)
+				&& Objects.equals(role, other.role) && Objects.equals(securityWatchList, other.securityWatchList);
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public List<Security> getSecurityWatchList() {
@@ -124,4 +137,6 @@ public class User {
 	public void setSecurityWatchList(List<Security> securityWatchList) {
 		this.securityWatchList = securityWatchList;
 	}
+
+	
 }
