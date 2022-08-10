@@ -10,6 +10,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import { signIn } from "../api/api";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
     palette: {
@@ -20,12 +22,19 @@ const theme = createTheme({
 });
 
 export default function SignIn() {
+    const navigator = useNavigate();
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
+        const formData = {
             email: data.get("email"),
             password: data.get("password"),
+        };
+
+        signIn(formData.email, formData.password).then((userObj) => {
+            localStorage.setItem("userId", userObj.id);
+            navigator("/");
         });
     };
 

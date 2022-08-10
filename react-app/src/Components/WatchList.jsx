@@ -19,9 +19,9 @@ const WatchList = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        console.log("call to api");
+        console.log("call to api", localStorage.getItem("userId"));
 
-        getWatchList(3).then((data) => {
+        getWatchList(localStorage.getItem("userId")).then((data) => {
             setWatchList(data);
         });
     }, []);

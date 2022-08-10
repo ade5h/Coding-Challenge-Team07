@@ -139,8 +139,14 @@ const BondsTable = () => {
                             const securities_ids = selectedRows.map((e, i) => {
                                 return e.original.id;
                             });
-                            console.log("selected rows", securities_ids);
-                            addToWatchList(securities_ids, 3)
+                            console.log(
+                                "selected rows",
+                                localStorage.getItem("userId")
+                            );
+                            addToWatchList(
+                                securities_ids,
+                                localStorage.getItem("userId")
+                            )
                                 .then((res) => {
                                     setAddedToWatchList(true);
                                     setTimeout(() => {

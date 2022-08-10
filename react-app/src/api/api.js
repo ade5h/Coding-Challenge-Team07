@@ -37,3 +37,34 @@ export const addToWatchList = async (securities_id, user_id) => {
     console.log("response inside add watchlist", res);
     return res;
 };
+
+export const signUp = async (email, name, password) => {
+    const body = {
+        email,
+        name,
+        password,
+    };
+    // const response = await axios.put(`${BASE_URL}/security/watchlist`, body);
+    const res = await axios({
+        method: "post",
+        url: `${BASE_URL}/auth/signup`,
+        data: body,
+    });
+    console.log("response inside add watchlist", res);
+    return res;
+};
+
+export const signIn = async (email, password) => {
+    const body = {
+        email,
+        password,
+    };
+    // const response = await axios.put(`${BASE_URL}/security/watchlist`, body);
+    const res = await axios({
+        method: "post",
+        url: `${BASE_URL}/auth/login`,
+        data: body,
+    });
+    console.log("response inside add watchlist", res.data);
+    return res.data;
+};

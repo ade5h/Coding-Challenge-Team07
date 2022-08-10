@@ -12,6 +12,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { signUp } from "../api/api";
+import userEvent from "@testing-library/user-event";
 
 const theme = createTheme({
     palette: {
@@ -25,10 +27,17 @@ export default function SignUp() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
+        const formDetails = {
             email: data.get("email"),
             password: data.get("password"),
-        });
+            name: data.get("firstName") + data.get("lastName"),
+        };
+
+        signUp(formDetails.email, formDetails.name, formDetails.password).then(
+            (userId) => {
+                localStorage.setItem("userId", userId);
+            }
+        );
     };
 
     return (
